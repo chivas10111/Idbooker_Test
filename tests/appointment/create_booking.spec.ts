@@ -1,6 +1,6 @@
 import { expect, test } from "playwright/test";
-import { Account } from "./pages/Account";
-import { Booking } from "./pages/Booking";
+import { Account } from "../pages/Account";
+import { Booking } from "../pages/Booking";
 
 test.describe("Create booking Idbooker", async () => {
   let account = new Account("sang.nguyen", "Sang@123");
@@ -28,7 +28,7 @@ test.describe("Create booking Idbooker", async () => {
     await page.waitForTimeout(5000);
   });
 
-  test.only("Handling create fixed booking Idbooker", async ({ page }) => {
+  test("Handling create fixed booking Idbooker", async ({ page }) => {
     const randomNumber = Math.floor(Math.random() * 51); 
     await page.goto("https://idbooker-staging.idtek.com.vn/");
     await page.locator(`//input[@id='Username']`).fill(account.getUsername());
