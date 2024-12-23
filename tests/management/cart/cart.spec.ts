@@ -1,5 +1,5 @@
 import { expect, test } from "playwright/test";
-import { Account } from "../pages/Account";
+import { Account } from "../../pages/Account";
 
 test.describe("Cart Idbooker", async () => {
     let account = new Account("sang.nguyen", "Sang@123");
