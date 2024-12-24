@@ -4,13 +4,16 @@ import { Account } from "../../pages/Account";
 test.describe("Package Idbooker", async () => {
     let account = new Account("sang.nguyen", "Sang@123");
     test('Handling create a new package', async ({ page }) => {
+        // Đăng nhập
         await page.goto("https://idbooker-staging.idtek.com.vn/");
         await page.locator(`//input[@id='Username']`).fill(account.getUsername());
         await page.locator(`//input[@id='Password']`).fill(account.getPassword());
         await page.locator(`//button[contains(@class,'login-btn')]`).click();
+        // Chuyển đến trang quản lý mục giỏ hàng phần gói dịch vụ
         await page.locator(`//header[@class='header-page']/div/div[3]`).click();
         await page.locator(`//i[@class='fa fa-shopping-bag side-menu-icon']//ancestor::div[@role='menuitem']`).click();
         await page.locator(`//a[@href='/package']`).click();
+        // Tạo mới gói dịch vụ
         await page.locator(`//button[contains(@class,'create-btn')]`).click();
         await page.locator(`//input[@name='content']`).fill('Test package');
         await page.locator(`//input[@name='price']`).clear();
@@ -25,13 +28,16 @@ test.describe("Package Idbooker", async () => {
     });
 
     test('Handling edit a package', async ({ page }) => {
+        // Đăng nhập
         await page.goto("https://idbooker-staging.idtek.com.vn/");
         await page.locator(`//input[@id='Username']`).fill(account.getUsername());
         await page.locator(`//input[@id='Password']`).fill(account.getPassword());
         await page.locator(`//button[contains(@class,'login-btn')]`).click();
+        // Chuyển đến trang quản lý mục giỏ hàng phần gói dịch vụ
         await page.locator(`//header[@class='header-page']/div/div[3]`).click();
         await page.locator(`//i[@class='fa fa-shopping-bag side-menu-icon']//ancestor::div[@role='menuitem']`).click();
         await page.locator(`//a[@href='/package']`).click();
+        // Chỉnh sửa gói dịch vụ
         await page.locator(`//span[normalize-space()='IYHXWF']//ancestor::div[@role='row']`).click();
         await page.locator(`//div[contains(@class,'ag-row-selected')]//a[contains(@class,'action-btn-edit')]`).click();
         await page.locator(`//span[contains(text(),'Dịch vụ')]//parent::button`).click();

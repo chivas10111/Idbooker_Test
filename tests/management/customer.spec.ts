@@ -4,12 +4,15 @@ import { Account } from "../pages/Account";
 test.describe("Customer Idbooker", async () => {
     let account = new Account("sang.nguyen", "Sang@123");
     test('Handling create new customer', async ({ page }) => {
+        // Đăng nhập
         await page.goto("https://idbooker-staging.idtek.com.vn/");
         await page.locator(`//input[@id='Username']`).fill(account.getUsername());
         await page.locator(`//input[@id='Password']`).fill(account.getPassword());
         await page.locator(`//button[contains(@class,'login-btn')]`).click();
+        // Chuyển sang tab quản lý mục khách hàng
         await page.locator(`//header[@class='header-page']/div/div[3]`).click();
         await page.locator(`//a[@href='/customer']`).click();
+        // Tạo khách hàng mới
         await page.locator(`//button[contains(@class,'create-btn')]`).click();
         await page.locator(`//input[@name='name']`).fill('Sang Nguyen');
         await page.locator(`//input[@name='phone']`).clear();

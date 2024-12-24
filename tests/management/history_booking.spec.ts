@@ -4,12 +4,15 @@ import { Account } from "../pages/Account";
 test.describe("History booking Idbooker", async () => {
     let account = new Account("sang.nguyen", "Sang@123");
     test('Handling create history booking', async ({ page }) => {
+        // Đăng nhập
         await page.goto("https://idbooker-staging.idtek.com.vn/");
         await page.locator(`//input[@id='Username']`).fill(account.getUsername());
         await page.locator(`//input[@id='Password']`).fill(account.getPassword());
         await page.locator(`//button[contains(@class,'login-btn')]`).click();
+        // Chuyển sang tab quản lý mục lịch đặt sân
         await page.locator(`//header[@class='header-page']/div/div[3]`).click();
         await page.locator(`//a[contains(@href,'/booking/index')]`).click();
+        // Tạo lịch đặt sân quá khứ mới
         await page.locator(`//button[contains(@class,'create-btn')]`).click();
         await page.locator(`//div[@class='container-cell phone-input']//input`).click();
         await page.locator(`//div[@class='ant-popover-inner-content']//div[8]`).click();
@@ -23,12 +26,15 @@ test.describe("History booking Idbooker", async () => {
     });
     
     test('Handling payment history booking at Action Row', async ({ page }) => {
+        // Đăng nhập
         await page.goto("https://idbooker-staging.idtek.com.vn/");
         await page.locator(`//input[@id='Username']`).fill(account.getUsername());
         await page.locator(`//input[@id='Password']`).fill(account.getPassword());
         await page.locator(`//button[contains(@class,'login-btn')]`).click();
+        // Chuyển sang tab quản lý mục lịch đặt sân
         await page.locator(`//header[@class='header-page']/div/div[3]`).click();
         await page.locator(`//a[contains(@href,'/booking/index')]`).click();
+        // Thanh toán lịch đặt sân quá khứ
         await page.locator(`//span[normalize-space()='037895']//ancestor::div[@role='row']`).click();
         await page.locator(`//div[contains(@class,'ag-row-selected')]//span[contains(@class,'id-popover-trigger')]`).click();
         await page.locator(`//span[@aria-label='dollar']//ancestor::li`).click();

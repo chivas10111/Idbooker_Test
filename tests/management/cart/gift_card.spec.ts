@@ -4,13 +4,16 @@ import { Account } from "../../pages/Account";
 test.describe("Gift card Idbooker", async () => {
     let account = new Account("sang.nguyen", "Sang@123");
     test('Handling create and pay gift card', async ({ page }) => {
+        // Đăng nhập
         await page.goto("https://idbooker-staging.idtek.com.vn/");
         await page.locator(`//input[@id='Username']`).fill(account.getUsername());
         await page.locator(`//input[@id='Password']`).fill(account.getPassword());
         await page.locator(`//button[contains(@class,'login-btn')]`).click();
+        // Chuyển đến trang quản lý mục giỏ hàng phần ký quỹ
         await page.locator(`//header[@class='header-page']/div/div[3]`).click();
         await page.locator(`//i[@class='fa fa-shopping-bag side-menu-icon']//ancestor::div[@role='menuitem']`).click();
         await page.locator(`//a[@href='/system/gift-card']`).click();
+        // Tạo mới và thanh toán ký quỹ
         await page.locator(`//button[contains(@class,'create-and-sell-gift-btn')]`).click();
         await page.locator(`//div[contains(@data-testid,'phone-component')]//input`).click();
         await page.locator(`//div[@class='ant-popover-inner-content']//div[8]`).click();
